@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Verificador de Certificados - SóEducador</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f2f5;
+      text-align: center;
+      padding-top: 50px;
+    }
+    .container {
+      background: #fff;
+      padding: 30px;
+      width: 400px;
+      margin: auto;
+      border-radius: 10px;
+      box-shadow: 0 0 10px #ccc;
+    }
+    input {
+      padding: 10px;
+      width: 80%;
+      margin-bottom: 10px;
+    }
+    button {
+      padding: 10px 20px;
+      background-color: #0077cc;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #005fa3;
+    }
+    .resultado {
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Verifique seu Certificado</h1>
+    <p>Digite o código do certificado:</p>
+    <input type="text" id="codigo" placeholder="Ex: SE-2025-0001">
+    <br>
+    <button onclick="verificarCertificado()">Verificar</button>
+
+    <div class="resultado" id="resultado"></div>
+  </div>
+
+  <script>
+    const certificados = {
+      "SE-2025-0001": {
+        nome: "João da Silva",
+        curso: "Informática Básica",
+        data: "01/07/2025",
+        carga: "40 horas",
+        cpf: "123.456.789-00",
+        empresa: "SóEducador"
+      },
+      "SE-2025-0002": {
+        nome: "Maria Oliveira",
+        curso: "Administração Pública",
+        data: "15/07/2025",
+        carga: "60 horas",
+        cpf: "987.654.321-00",
+        empresa: "SóEducador"
+      }
+    };
+
+    function verificarCertificado() {
+      const codigo = document.getElementById('codigo').value.trim();
+      const resultado = document.getElementById('resultado');
+      const cert = certificados[codigo];
+
+      if (cert) {
+        resultado.innerHTML = `
+          <h2 style="color: green;">✅ Certificado Válido</h2>
+          <p><strong>Nome:</strong> ${cert.nome}</p>
+          <p><strong>Curso:</strong> ${cert.curso}</p>
+          <p><strong>Data de Emissão:</strong> ${cert.data}</p>
+          <p><strong>Carga Horária:</strong> ${cert.carga}</p>
+          <p><strong>CPF:</strong> ${cert.cpf}</p>
+          <p><strong>Empresa:</strong> ${cert.empresa}</p>
+        `;
+      } else {
+        resultado.innerHTML = `
+          <h2 style="color: red;">❌ Certificado Não Encontrado</h2>
+          <p>Verifique se o código digitado está correto.</p>
+        `;
+      }
+    }
+  </script>
+</body>
+</html>
